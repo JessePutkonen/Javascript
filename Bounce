@@ -1,1 +1,38 @@
+let rad = 20; // Koko
+let xpos, ypos; //  määritetään mistä starttaa
 
+let xspeed = 9.8; // Nopeutta x-akselilla 
+let yspeed = 2.2; // Nopeutta y-akselilla
+
+let xdirection = 1; // Vasemmalle tai oikeelle
+let ydirection = 1; // Ylös tahi alas
+
+function setup() {
+  createCanvas(720, 400);
+  noStroke();
+  frameRate(30);
+  ellipseMode(RADIUS);
+  /ja kohta mistä starttaa 
+  xpos = width / 2;
+  ypos = height / 2;
+}
+
+function draw() {
+  background(102);
+
+  // Päivitä muodon sijainti
+  xpos = xpos + xspeed * xdirection;
+  ypos = ypos + yspeed * ydirection;
+
+  // testaa, ylittääkö muoto näytön rajat
+  // Jos näin on, käännä sen suunta kertomalla -1
+  if (xpos > width - rad || xpos < rad) {
+    xdirection *= -1;
+  }
+  if (ypos > height - rad || ypos < rad) {
+    ydirection *= -1;
+  }
+
+  // Piirrä muoto, nyt halutaan ellipsi/pallo
+  ellipse(xpos, ypos, rad, rad);
+}
